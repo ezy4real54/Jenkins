@@ -38,13 +38,13 @@ pipeline {
             }
             steps {
                 dir(path: env.BUILD_ID) {
-                    sh "chmod +x -R ${env.BUILD_ID}"
                     unstash(name: 'compiled-results')
                     sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F prog.py'"
                 }
             }
             post {
                 success {
+                    sh "chmod +x -R ${env.BUILD_ID}"
                     archiveArtifacts "${env.BUILD_ID}/sources/dist/prog"
                     sh "rm -rf ${env.BUILD_ID}/sources/build ${env.BUILD_ID}/sources/dist"
                 }
