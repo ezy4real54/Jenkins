@@ -37,6 +37,7 @@ pipeline {
                 IMAGE = 'cdrx/pyinstaller-linux'
             }
             steps {
+                sh "chmod +x -R ${env.BUILD_ID}"
                 dir(path: env.BUILD_ID) {
                     unstash(name: 'compiled-results')
                     sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F prog.py'"
