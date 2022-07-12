@@ -44,7 +44,6 @@ pipeline {
             }
             post {
                 success {
-                    sh "chmod a+x -R ${env.BUILD_ID}"
                     archiveArtifacts "${env.BUILD_ID}/sources/dist/prog"
                     sh "rm -rf ${env.BUILD_ID}/sources/build ${env.BUILD_ID}/sources/dist"
                 }
